@@ -1,4 +1,4 @@
-package code.array;
+package com.qs.leetcode.code.array;
 
 /**
  * @author LegenQS
