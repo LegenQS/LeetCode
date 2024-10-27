@@ -1,9 +1,7 @@
 package com.qs.leetcode.code.array;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Class of algorithms that use binary search.
@@ -12,13 +10,6 @@ import java.util.stream.Collectors;
  * @date 10/20/24 11:09 PM
  */
 public class BinarySearch {
-
-    public static void main(String[] args) {
-        int[] nums1 = new int[]{1, 2};
-        int[] nums2 = new int[]{3, 4};
-        BinarySearch binarySearch = new BinarySearch();
-        System.out.println(binarySearch.findMedianSortedArrays(nums1, nums2));
-    }
     /**
      * <p>LC-33</p>
      * There is an integer array nums sorted in ascending order (with distinct values).
