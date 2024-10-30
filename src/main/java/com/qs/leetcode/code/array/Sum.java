@@ -138,4 +138,102 @@ public class Sum {
         }
         return result;
     }
+
+    /**
+     * <p>LC-16</p>
+     * Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is
+     * closest to target. Return the sum of the three integers.
+     * You may assume that each input would have exactly one solution.
+     */
+    public int threeSumClosest(int[] nums, int target) {
+        int res = Integer.MAX_VALUE;
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            int localTarget = target - nums[i];
+
+            int left = i + 1, right = nums.length - 1;
+            while (left < right) {
+                int temp = nums[left] + nums[right];
+                if (temp == localTarget) {
+                    return target;
+                }
+                else if (temp > localTarget) {
+                    if (temp - localTarget <= Math.abs(target - res)) {
+                        res = nums[i] + temp;
+                    }
+                    right--;
+                }
+                else {
+                    if (localTarget - temp <= Math.abs(target - res)) {
+                        res = nums[i] + temp;
+                    }
+                    left++;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * <p>LC-454</p>
+     * Given four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples
+     * (i, j, k, l) such that:
+     * <ul>
+     *     <li>0 <= i, j, k, l < n</li>
+     *     <li>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</li>
+     * </ul>
+     */
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        int res = 0;
+
+        Map<Integer, Integer> sumMap = new HashMap<>();
+
+        for (int num1 : nums1) {
+            for (int num2 : nums2) {
+                sumMap.merge(num1 + num2, 1, Integer::sum);
+            }
+        }
+
+        for (int num3 : nums3) {
+            for (int num4 : nums4) {
+                res += sumMap.getOrDefault(-(num3 + num4), 0);
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * <p>LC-259</p>
+     * Given an integer array nums and an integer target. You need to find the number of unique triplets
+     * (i, j, k) in the array such that:
+     * <ul>
+     *     <li>i < j < k</li>
+     *     <li>nums[i] + nums[j] + nums[k]< target.</li>
+     * </ul>
+     */
+    public int threeSumSmaller(int[] nums, int target) {
+        int res = 0;
+        int length = nums.length;
+        Arrays.sort(nums);
+
+        for (int i = 0; i < length - 2; i++) {
+            if (nums[i] >= target) {
+                break;
+            }
+            int left = i + 1, right = length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum < target) {
+                    res += right - left;
+                    left++;
+                }
+                else if (sum >= target) {
+                    right--;
+                }
+            }
+        }
+        return res;
+    }
 }
